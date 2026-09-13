@@ -1,5 +1,5 @@
 de_ID;de_Name;en_Name;en_ID;itemCategory
-1;"""Alex' Werkzeugkiste""";"""Alex's Toolbox""";1;TB
+1;Alex' Werkzeugkiste;Alex's Toolbox;1;TB
 2;Nützliche Taschenlampe;Utility Flashlight;4;FL
 3;Sani-Kasten des Rangers;Ranger Med-Kit;3;MK
 4;Werkzeugkiste des Inginieurs;Engineer's Toolbox;2;TB
@@ -8,22 +8,22 @@ de_ID;de_Name;en_Name;en_ID;itemCategory
 7;Kommentierte Karte;Annotated Map;5;M
 8;Notfall-Sani-Kasten;Emergency Med-Kit;7;MK
 9;Sporttaschenlampe;Sport Flashlight;10;FL
-10;Vigos Nebelfläschchen;"""Vigo's Fog Vial""";11;FV
-11;Werkzeugkiste des Mechanikers;"""Mechanic's Toolbox""";8;TB
+10;Vigos Nebelfläschchen;Vigo's Fog Vial;11;FV
+11;Werkzeugkiste des Mechanikers;Mechanic's Toolbox;8;TB
 12;Blutsinn-Karte;Bloodsense Map;13;M
 13;Halloween-Brotdose;All Hallows' Eve Lunchbox;12;MK
-14;Irrlicht;"""Will o'Wisp""";14;FL
+14;Irrlicht;Will o'Wisp;14;FL
 15;Winter-Knallbonbon;Winter Party Starter;15;X
 16;Erste-Hilfe-Kasten;First Aid Kit;18;MK
 17;Gekritzelte Karte;Scribbled Map;20;M
 18;Matter Schlüssel;Dull Key;17;K
-19;Nebelfläschchen des Kunsthandwerkers;"""Artisan's Fog Vial""";16;FV
+19;Nebelfläschchen des Kunsthandwerkers;Artisan's Fog Vial;16;FV
 20;Taschenlampe;Flashlight;19;FL
 21;Werkzeugkiste;Toolbox;21;TB
 22;Abgenutzte Werkzeuge;Worn-Out Tools;26;TB
 23;Erste-Hilfe-Campingset;Camping Aid Kit;24;MK
 24;Geheimnisvolle Karte;Cryptic Map;25;M
-25;Nebelfläschchen des Lehrlings;"""Apprentice's Fog Vial""";22;FV
+25;Nebelfläschchen des Lehrlings;Apprentice's Fog Vial;22;FV
 26;Zerbrochener Schlüssel;Broken Key;23;K
 27;Chinesischer Böller;Chinese Firecracker;30;X
 28;Festliche Werkzeugkiste;Festive Toolbox;31;TB

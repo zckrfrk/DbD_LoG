@@ -1,4 +1,4 @@
-## README ZUR VERSION 4.0 - SÜNDHAFT-GROẞES-UPDATE ##
+## README ZUR VERSION 4.0.1 - Bugfixes + kleine Änderungen zum SÜNDHAFT-GROẞEN-UPDATE ##
 
 HUHW zu meinem Tool, mit welchem man sich für Dead by Daylight zufällig Charaktere, Perks, Items, Addons und Opfergaben auswählen kann. Viel Spaß damit!
 Es ist lange noch nicht perfekt, deshalb bitte ich, mir Auffälligkeiten (Fehler, Probleme, Vorschläge und Verbesserungsvorschläge) gerne auf Discord oder via Mail mitzuteilen: zckrfrk.business@t-online.de. Vielen Dank!
@@ -23,12 +23,13 @@ Mari aka Zckrfrk
 ►► ERKLÄRUNG DES TOOLS ◄◄
 Da das Tool auf den ersten Blick eventuell etwas erschlagend aussehen könnte, gebe ich hiermit eine kleine Anleitung zum Besten, in dem ich auf jedes Element des Tools genauer eingehe.
 ► Tool als Fenster: Beim Öffnen der .BAT-Datei öffnen sich zwei Fenster (eines mit einem schwarzen Logo und eines mit einem blauen Logo). Das mit dem schwarzen Logo ist für das automatische Öffnen des anderen Fensters da und kann ignoriert werden. Um das Fenster des Tools aufzurufen, wenn es schon per .BAT-Datei geöffnet wurde, ist das Fenster mit dem blauen Logo (Powershell) notwendig. Wenn das Tool (Fenster mit blauem Logo) geschlossen wird, dann schließt sich das andere Fenster (schwarzes Logo) gleich mit.
-► Mode: Im Dropdown-Menü kann man zwischen Survivor und Killer auswählen. Klickt man auf das Dropdown-Fenster und dann auf die jeweilig andere Rolle, ändern sich die Optionen der Rolle.
+► Role: Im Dropdown-Menü kann man zwischen Survivor und Killer auswählen. Klickt man auf das Dropdown-Fenster und dann auf die jeweilig andere Rolle, ändern sich die Optionen der Rolle.
 ► Language: Hier kann die Sprache für die Augabe angepasst werden. Spielst du DbD auf Englisch? - Dann wähle "English" aus, spielst du es auf Deutsch, dann natürlich "Deutsch".
-► Save Config: Dieser Button speichert die aktuelle Sprache und die aktuellen Optionen der jeweiligen Rolle ("Survivor Options" bzw. "Killer Options")
+► Save Config: Dieser Button speichert die aktuelle Sprache, die aktuelle Rolle als Startrolle des Tools und die aktuellen Optionen der jeweiligen Rolle ("Survivor Options" bzw. "Killer Options")
 ► Survivor Options: In diesem Bereich kannst du anhaken, was du für deinen Survivor generieren möchtest. Nur sichtbar, wenn der Mode auf "Survivor" steht.
 ► Killer Options: In diesem Bereich kannst du anhaken, was du für deinen Killer generieren möchtest. Nur sichtbar, wenn der Mode auf "Killer" steht.
 ► Survivor: Diese Checkbox sorgt dafür, dass angehakt auch ein Survivor-Name generiert wird.
+► Killer: Diese Checkbox sorgt dafür, dass angehakt auch ein Killer-Name generiert wird.
 ► Perks: Diese Checkbox sorgt dafür, dass angehakt auch vier Perks für die jeweilig aktive Rolle generiert wird.
 ► Item: Diese Checkbox sorgt dafür, dass angehakt auch ein Item für deinen Survivor generiert wird.
 ► Add-ons: Diese Checkbox sorgt dafür, dass angehakt auch Add-ons für das Item für deinen Survivor generiert wird.
@@ -51,9 +52,32 @@ Zur leichteren Lesbarkeit wird das de oder en vor dem Dateinamen hier im Changel
 ### aktuelle Version: ###
 #########################
 
- ───────────────────────────┐
-  VERSION 4.0 - SÜNDHAFT-GROẞES-UPDATE 
-└───────────────────────────
+ ─────────────────────────────────────────────────────┐
+  VERSION 4.0.1 - Bugfixes + kleine Änderungen zum SÜNDHAFT-GROẞEN-UPDATE  
+└─────────────────────────────────────────────────────
+
+→ SurvCore Editon Version 4.0.1 - Update vom 13.09.2026 - DbD Version 10.1.2 ←
+
+1. Bugfixes
+• Problem behoben, bei dem die "Offering" Checkbox bei "Survivor" gefehlt hatte, wenn von "Surv" auf Killer und dann wieder zurück gewechselt wurde
+• Problem behoben, bei dem die Language automatisch zu "Deutsch" gesprungen ist, wenn Language "English" ausgewählt war und Role geändert wurde
+
+2. Änderungen
+• Checkbox "Addon-Farben" in "Addon-Colours" umbenannt
+• "Mode" in "Role" umbenannt (sowohl in der GUI als auch im Skript)
+• alle "Anführungsstriche" aus der CSV-Datei "items_Survivors" entfernt (wurden zuvor ebenso in der Ausgabe der GUI angezeigt)
+• Erklärung des Tools im README angepasst: Mode → Role / Inhalt des Punktes "Save Config" / fehlenden Punkt "Killer" hinzugefügt
+
+3. Neue Funktionalität
+• Feature hinzugefügt, dass nun auch die zuletzt verwendete Rolle in der Config mitgespeichert wird (sodass Killer-Mains nicht immer von der Surv-Rolle wechseln müssen beim Start des Tools)
+
+
+############################
+### ehemalige Versionen: ###
+############################
+
+
+# VERSION 4.0 - SÜNDHAFT-GROẞES-UPDATE #
 
 SurvCore Editon Version 4.0 - Update vom 27.08.2026 - DbD Version 10.1.0
 
@@ -119,10 +143,6 @@ Object of Obsession (Bound by Obsession)
 • de_perks_Killer: Geißelhaken: Gezackter Kompaß → Geißelhaken: Gezackter Kompass
 • chars_Survivors: Yui kimura → Yui Kimura
 
-
-############################
-### ehemalige Versionen: ###
-############################
 
 # VERSION 3.0 - KILLER-UPDATE #
 

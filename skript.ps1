@@ -83,22 +83,22 @@ $form.Width = 820
 $form.Height = 520
 $form.StartPosition = "CenterScreen"
 
-# Mode Label
-$modeLabel = New-Object Windows.Forms.Label
-$modeLabel.Text = "Mode"
-$modeLabel.Top = 8
-$modeLabel.Left = 20
-$modeLabel.Width = 40
-$form.Controls.Add($modeLabel)
+# Role Label
+$roleLabel = New-Object Windows.Forms.Label
+$roleLabel.Text = "Role"
+$roleLabel.Top = 8
+$roleLabel.Left = 20
+$roleLabel.Width = 40
+$form.Controls.Add($roleLabel)
 
-# Mode Dropdown
-$modeDropdown = New-Object Windows.Forms.ComboBox
-$modeDropdown.Items.AddRange(@("Survivor","Killer"))
-$modeDropdown.SelectedIndex = 0
-$modeDropdown.Top = 5
-$modeDropdown.Left = 60
-$modeDropdown.Width = 140
-$form.Controls.Add($modeDropdown)
+# Role Dropdown
+$roleDropdown = New-Object Windows.Forms.ComboBox
+$roleDropdown.Items.AddRange(@("Survivor","Killer"))
+$roleDropdown.SelectedIndex = 0
+$roleDropdown.Top = 5
+$roleDropdown.Left = 60
+$roleDropdown.Width = 140
+$form.Controls.Add($roleDropdown)
 
 # Language Label
 $langLabel = New-Object Windows.Forms.Label
@@ -232,13 +232,23 @@ $form.Controls.Add($outputClear)
 $config = Load-Config $configPath
 if (!$config) {
     $config=@{
+        LastRole="Survivor"
         Survivor=@{Language="English";Options=@{Char=$true;Perks=$true;Item=$true;Addons=$true;Offering=$true}}
         Killer=@{Language="English";Options=@{Killer=$true;Perks=$true;AddonColours=$true;Offering=$true}}
     }
 }
 
+# Role aus Config laden
+if ($config.LastRole -and $roleDropdown.Items.Contains($config.LastRole)) {
+    $roleDropdown.SelectedItem = $config.LastRole
+} else {
+    # Fallback, falls ungültig
+    $roleDropdown.SelectedItem = "Survivor"
+}
+
 function ApplySurvivor {
     param($cfg)
+    $chk5.Visible=$true
     $optionsPanel.Text="Survivor Options"
     $chk1.Text="Survivor"; $chk1.Checked=$cfg.Survivor.Options.Char
     $chk2.Text="Perks";    $chk2.Checked=$cfg.Survivor.Options.Perks
@@ -251,27 +261,26 @@ function ApplyKiller {
     $optionsPanel.Text="Killer Options"
     $chk1.Text="Killer"; $chk1.Checked=$cfg.Killer.Options.Killer
     $chk2.Text="Perks";  $chk2.Checked=$cfg.Killer.Options.Perks
-    $chk3.Text="Addon-Farben"; $chk3.Checked=$cfg.Killer.Options.AddonColours
+    $chk3.Text="Addon-Colours"; $chk3.Checked=$cfg.Killer.Options.AddonColours
     $chk4.Text="Offering"; $chk4.Checked=$cfg.Killer.Options.Offering
     $chk5.Visible=$false
 }
 
-if ($modeDropdown.SelectedItem -eq "Survivor") { ApplySurvivor $config } else { ApplyKiller $config }
-$languageDropdown.SelectedItem = if ($modeDropdown.SelectedItem -eq "Survivor") { $config.Survivor.Language } else { $config.Killer.Language }
+if ($roleDropdown.SelectedItem -eq "Survivor") { ApplySurvivor $config } else { ApplyKiller $config }
+$languageDropdown.SelectedItem = if ($roleDropdown.SelectedItem -eq "Survivor") { $config.Survivor.Language } else { $config.Killer.Language }
 
-$modeDropdown.Add_SelectedIndexChanged({
-    if ($modeDropdown.SelectedItem -eq "Survivor") {
+$roleDropdown.Add_SelectedIndexChanged({
+    if ($roleDropdown.SelectedItem -eq "Survivor") {
         ApplySurvivor $config
-        $languageDropdown.SelectedItem=$config.Survivor.Language
     } else {
         ApplyKiller $config
-        $languageDropdown.SelectedItem=$config.Killer.Language
     }
     $outputBox.Text=""
 })
 
 $saveButton.Add_Click({
-    $m=$modeDropdown.SelectedItem
+    $m=$roleDropdown.SelectedItem
+    $config.LastRole = $m
     if ($m -eq "Survivor") {
         $config.Survivor.Language=$languageDropdown.SelectedItem
         $config.Survivor.Options.Char=$chk1.Checked
@@ -340,7 +349,7 @@ function Render {
     $col = if ($lang -eq "Deutsch") {"de_Name"} else {"en_Name"}
     $suf = HeaderSuffix $lang
     $o=@()
-    if ($r.mode -eq "Survivor") {
+    if ($r.role -eq "Survivor") {
         $o+="SURVIVOR - $suf"
         if ($r.options.Char) { $o+="Survivor: $(Get-DisplayName $r.charRow $col)" }
         if ($r.options.Perks) { $o+="Perks: " + (($r.perkRows | ForEach-Object {Get-DisplayName $_ $col}) -join " / ") }
@@ -366,13 +375,13 @@ function Render {
 $script:lastResult=$null
 
 $button.Add_Click({
-    $mode=$modeDropdown.SelectedItem
+    $role=$roleDropdown.SelectedItem
     $lang=$languageDropdown.SelectedItem
     $col = if ($lang -eq "Deutsch") {"de_Name"} else {"en_Name"}
     $dir = Join-Path $PSScriptRoot "data"
 
     try {
-        if ($mode -eq "Survivor") {
+        if ($role -eq "Survivor") {
             $chars=SafeArray (Read-CsvSafe (Join-Path $dir "chars_Survivors.csv"))
             $perks=SafeArray (Read-CsvSafe (Join-Path $dir "perks_Survivors.csv"))
             $offer=SafeArray (Read-CsvSafe (Join-Path $dir "offerings_Survivors.csv"))
@@ -403,7 +412,7 @@ $button.Add_Click({
             }
 
             $script:lastResult=@{
-                mode="Survivor"; charRow=$char; perkRows=$perkRows; itemRow=$item; itemCode=$code; addonsSelected=$addons; offRow=$off;
+                role="Survivor"; charRow=$char; perkRows=$perkRows; itemRow=$item; itemCode=$code; addonsSelected=$addons; offRow=$off;
                 options=@{Char=$chk1.Checked;Perks=$chk2.Checked;Item=$chk3.Checked;Addons=$chk4.Checked;Offering=$chk5.Checked}
             }
             $outputBox.Text = Render $script:lastResult $lang
@@ -423,7 +432,7 @@ $button.Add_Click({
             $addon = if ($addons.Count -gt 0) { Get-Random $addons } else { $null }
 
             $script:lastResult=@{
-                mode="Killer"; charRow=$char; perkRows=$perkRows; addonComboRow=$addon; offRow=$off;
+                role="Killer"; charRow=$char; perkRows=$perkRows; addonComboRow=$addon; offRow=$off;
                 options=@{Killer=$chk1.Checked;Perks=$chk2.Checked;AddonColours=$chk3.Checked;Offering=$chk4.Checked}
             }
             $outputBox.Text = Render $script:lastResult $lang

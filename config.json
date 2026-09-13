@@ -1,21 +1,22 @@
 ﻿{
     "Survivor":  {
-                     "Language":  "Deutsch",
                      "Options":  {
-                                     "Perks":  true,
-                                     "Addons":  true,
                                      "Offering":  true,
                                      "Char":  false,
-                                     "Item":  true
-                                 }
+                                     "Perks":  true,
+                                     "Item":  true,
+                                     "Addons":  true
+                                 },
+                     "Language":  "Deutsch"
                  },
     "Killer":  {
+                   "Language":  "Deutsch",
                    "Options":  {
                                    "Killer":  false,
                                    "AddonColours":  true,
                                    "Perks":  true,
                                    "Offering":  true
-                               },
-                   "Language":  "Deutsch"
-               }
+                               }
+               },
+    "LastRole":  "Survivor"
 }
