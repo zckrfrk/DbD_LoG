@@ -1,4 +1,4 @@
-﻿### DBD Loadout Generator - SurvCore Editon ###
+﻿### DbD_LoG (Dead by Daylight Loadout Generator) by @zckrfrk ###
 
 Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
@@ -78,7 +78,7 @@ function HeaderSuffix { param($l) if ($l -eq "Deutsch") {"DEUTSCH"} else {"ENGLI
 
 # --- UI ---
 $form = New-Object Windows.Forms.Form
-$form.Text = "DBD Loadout Generator by @zckrfrk"
+$form.Text = "DbD_LoG (Dead by Daylight Loadout Generator) by @zckrfrk"
 $form.Width = 820
 $form.Height = 520
 $form.StartPosition = "CenterScreen"
@@ -175,13 +175,29 @@ $saveButton.Left=12
 $saveButton.Width=260
 $form.Controls.Add($saveButton)
 
+# Append Button
+$appendButton = New-Object Windows.Forms.Button
+$appendButton.Text="APPEND"
+$appendButton.Top=35
+$appendButton.Left=545
+$appendButton.Width=80
+$form.Controls.Add($appendButton)
+
+# Coinflip Button
+$flipCoinButton = New-Object Windows.Forms.Button
+$flipCoinButton.Text="COINFLIP"
+$flipCoinButton.Top=35
+$flipCoinButton.Left=640
+$flipCoinButton.Width=80
+$form.Controls.Add($flipCoinButton)
+
 # Options Panel
 $optionsPanel = New-Object Windows.Forms.GroupBox
 $optionsPanel.Text="Options"
 $optionsPanel.Top=80
 $optionsPanel.Left=12
-$optionsPanel.Width=360
-$optionsPanel.Height=360
+$optionsPanel.Width=380
+$optionsPanel.Height=345
 $form.Controls.Add($optionsPanel)
 
 $chk1=New-Object Windows.Forms.CheckBox
@@ -189,111 +205,384 @@ $chk2=New-Object Windows.Forms.CheckBox
 $chk3=New-Object Windows.Forms.CheckBox
 $chk4=New-Object Windows.Forms.CheckBox
 $chk5=New-Object Windows.Forms.CheckBox
+$chk6=New-Object Windows.Forms.CheckBox
+$chk7=New-Object Windows.Forms.CheckBox
 
 $chk1.Top=20; $chk2.Top=45; $chk3.Top=70; $chk4.Top=95; $chk5.Top=120
-foreach ($c in @($chk1,$chk2,$chk3,$chk4,$chk5)) { $c.Left=10; $c.Width=320; $optionsPanel.Controls.Add($c) }
+foreach ($c in @($chk1,$chk2,$chk3,$chk4,$chk5,$chk6)) { $c.Left=10; $c.Width=100; $optionsPanel.Controls.Add($c) }
+$chk6.Left = 115; $chk6.Top = 95; $chk6.Width = 120
+$chk7.Left = 10; $chk7.Top = 70; $chk7.Width = 100
+$optionsPanel.Controls.Add($chk7)
+
+# Aura & Generator Checkbox
+$chkAura = New-Object Windows.Forms.CheckBox
+$chkGenerator = New-Object Windows.Forms.CheckBox
+$chkAura.Text = "extra Aura/Alert"; $chkAura.Left = 170; $chkAura.Top = 45; $chkAura.Width = 80; $chkAura.Visible = $false; $optionsPanel.Controls.Add($chkAura)
+$chkGenerator.Text = "extra Generator"; $chkGenerator.Left = 250; $chkGenerator.Top = 45; $chkGenerator.Width = 80; $chkGenerator.Visible = $false; $optionsPanel.Controls.Add($chkGenerator)
+
+# CharCountSlider (Survivor) + All Button for Chars Survivor
+$charCountSliderS = New-Object Windows.Forms.NumericUpDown
+$charCountSliderS.Minimum = 1
+$charCountSliderS.Maximum = 44 # später dynamisch
+$charCountSliderS.Value = 1
+$charCountSliderS.Width = 42
+$charCountSliderS.Left = 115
+$charCountSliderS.Top = 18
+$optionsPanel.Controls.Add($charCountSliderS)
+$allCharsButtonS = New-Object Windows.Forms.Button
+$allCharsButtonS.Text = "all"
+$allCharsButtonS.Width = 35
+$allCharsButtonS.Height = 20
+$allCharsButtonS.Left = 160
+$allCharsButtonS.Top = 18
+$optionsPanel.Controls.Add($allCharsButtonS)
+
+# PerkCountSlider (Survivor)
+$perkCountSliderS = New-Object Windows.Forms.NumericUpDown
+$perkCountSliderS.Minimum = 1
+$perkCountSliderS.Maximum = 16
+$perkCountSliderS.Value = 4
+$perkCountSliderS.Width = 42
+$perkCountSliderS.Height = 15
+$perkCountSliderS.Left = 115
+$perkCountSliderS.Top = 45
+$optionsPanel.Controls.Add($perkCountSliderS)
+
+# itemCountSlider (Survivor)
+$itemCountSlider = New-Object Windows.Forms.NumericUpDown
+$itemCountSlider.Minimum = 1
+$itemCountSlider.Maximum = 4
+$itemCountSlider.Value = 1
+$itemCountSlider.Width = 42
+$itemCountSlider.Left = 115
+$itemCountSlider.Top = 68
+$itemCountSlider.Visible = $false
+$optionsPanel.Controls.Add($itemCountSlider)
+
+# CharCountSlider (Killer) + All Button for Chars Killer
+$charCountSliderK = New-Object Windows.Forms.NumericUpDown
+$charCountSliderK.Minimum = 1
+$charCountSliderK.Maximum = 38 # später dynamisch
+$charCountSliderK.Value = 1
+$charCountSliderK.Width = 42
+$charCountSliderK.Left = 115
+$charCountSliderK.Top = 18
+$charCountSliderK.Visible = $false
+$optionsPanel.Controls.Add($charCountSliderK)
+$allCharsButtonK = New-Object Windows.Forms.Button
+$allCharsButtonK.Text = "all"
+$allCharsButtonK.Width = 35
+$allCharsButtonK.Height = 20
+$allCharsButtonK.Left = 160
+$allCharsButtonK.Top = 18
+$allCharsButtonK.Visible = $false
+$optionsPanel.Controls.Add($allCharsButtonK)
+
+# Set max Values for Char Sliders &  All Buttons
+ $survChars = Read-CsvSafe (Join-Path $PSScriptRoot "data\chars_Survivors.csv")
+    if ($survChars.Count -gt 0) {
+        $charCountSliderS.Maximum = $survChars.Count
+    }
+$killerChars = Read-CsvSafe (Join-Path $PSScriptRoot "data\chars_Killer.csv")
+    if ($killerChars.Count -gt 0) {
+        $charCountSliderK.Maximum = $killerChars.Count
+    }
+$allCharsButtonS.Add_Click({
+    $charCountSliderS.Value = $charCountSliderS.Maximum
+})
+$allCharsButtonK.Add_Click({
+    $charCountSliderK.Value = $charCountSliderK.Maximum
+})
+
+# PerkCountSlider (Killer)
+$perkCountSliderK = New-Object Windows.Forms.NumericUpDown
+$perkCountSliderK.Minimum = 1
+$perkCountSliderK.Maximum = 4
+$perkCountSliderK.Value = 4
+$perkCountSliderK.Width = 42
+$perkCountSliderK.Height = 15
+$perkCountSliderK.Left = 115
+$perkCountSliderK.Top = 45
+$perkCountSliderK.Visible = $false
+$optionsPanel.Controls.Add($perkCountSliderK)
 
 # Switch Button
 $outputBox = New-Object Windows.Forms.TextBox
 $outputBox.Multiline=$true
 $outputBox.ScrollBars="Vertical"
 $outputBox.Width=420
-$outputBox.Height=360
+$outputBox.Height=345
 $outputBox.Top=80
 $outputBox.Left=390
 $outputBox.ReadOnly=$true
 $form.Controls.Add($outputBox)
 
-# Copy Label ("Copied!")
-$outputCopy = New-Object Windows.Forms.Label
-$outputCopy.Top=35
-$outputCopy.Left=565
-$outputCopy.Width=80
-$outputCopy.ForeColor='Green'
-$form.Controls.Add($outputCopy)
+# Status Label (Copy/Export/Clear/Append/CoinFlip)
+$outputStatus = New-Object Windows.Forms.Label
+$outputStatus.Top = 35
+$outputStatus.Left = 735
+$outputStatus.Width = 80
+$outputStatus.ForeColor = 'Green'
+$form.Controls.Add($outputStatus)
 
-# Export Label ("Exported!")
-$outputExport = New-Object Windows.Forms.Label
-$outputExport.Top=35
-$outputExport.Left=655
-$outputExport.Width=80
-$outputExport.ForeColor='Green'
-$form.Controls.Add($outputExport)
+# INFO LABEL #
+$infoLabel = New-Object System.Windows.Forms.Label
+$infoLabel.AutoSize = $true
+$infoLabel.Left = 10
+$infoLabel.Top = 430
+$infoLabel.Text = "DbD_LoG (Dead by Daylight Loadout Generator)`n© 2025-2026 Zckrfrk | Check the README for more info."
+$form.Controls.Add($infoLabel)
+# GitHub
+$linkGitHub = New-Object System.Windows.Forms.LinkLabel
+$linkGitHub.AutoSize = $true
+$linkGitHub.Left = 10
+$linkGitHub.Top = 460
+$linkGitHub.Text = "► GitHub"
+$form.Controls.Add($linkGitHub)
+$linkGitHub.Add_LinkClicked({
+    Start-Process "https://github.com/zckrfrk/DbD_LoG"
+})
+# Discord
+$linkDiscord = New-Object System.Windows.Forms.LinkLabel
+$linkDiscord.AutoSize = $true
+$linkDiscord.Left = 60
+$linkDiscord.Top = 460
+$linkDiscord.Width = 100
+$linkDiscord.Text = "► Discord (Updates/Feedback/BugReport)"
+$form.Controls.Add($linkDiscord)
+$linkDiscord.Add_LinkClicked({
+    Start-Process "https://discord.gg/6XXCFcVzU3"
+})
+# Zckrfrk
+$linkProfile = New-Object System.Windows.Forms.LinkLabel
+$linkProfile.AutoSize = $true
+$linkProfile.Left = 275
+$linkProfile.Top = 460
+$linkProfile.Text = "► Zckrfrk"
+$form.Controls.Add($linkProfile)
+$linkProfile.Add_LinkClicked({
+    Start-Process "https://linktr.ee/zckrfrk"
+})
+# README
+$linkReadMe = New-Object System.Windows.Forms.LinkLabel
+$linkReadMe.AutoSize = $true
+$linkReadMe.Left = 325
+$linkReadMe.Top = 460
+$linkReadMe.Text = "► README"
+$form.Controls.Add($linkReadMe)
+$linkReadMe.Add_LinkClicked({
+    Start-Process "https://github.com/zckrfrk/DbD_LoG/blob/main/README.txt"
+})
 
-# Clear Label ("Cleared!")
-$outputClear = New-Object Windows.Forms.Label
-$outputClear.Top=35
-$outputClear.Left=740
-$outputClear.Width=50 
-$outputClear.ForeColor='Green'
-$form.Controls.Add($outputClear)
 
 # --- Config load ---
 $config = Load-Config $configPath
+if (-not $config.Survivor.PerkCount) {
+$config.Survivor | Add-Member -NotePropertyName PerkCount -NotePropertyValue 4 -Force
+}
 if (!$config) {
     $config=@{
         LastRole="Survivor"
-        Survivor=@{Language="English";Options=@{Char=$true;Perks=$true;Item=$true;Addons=$true;Offering=$true}}
-        Killer=@{Language="English";Options=@{Killer=$true;Perks=$true;AddonColours=$true;Offering=$true}}
+        Survivor=@{Language="English";CharCount=1;PerkCount=4;ItemCount=1;Options=@{Char=$true;Perks=$true;Item=$true;Addons=$true;AddonColours=$false;Offering=$true}}
+        Killer=@{Language="English";CharCount=1;PerkCount=4;Options=@{Killer=$true;Perks=$true;Addons=$false;AddonColours=$true;Offering=$true}}
     }
 }
 
-# Role aus Config laden
+# Load Survivor Values from Config
+if ($config.Survivor.CharCount) {
+    $charCountSliderS.Value = [Math]::Min($config.Survivor.CharCount, $charCountSliderS.Maximum)
+}
+
+if ($config.Survivor.PerkCount) {
+$perkCountSliderS.Value = [Math]::Min($config.Survivor.PerkCount, $perkCountSliderS.Maximum)
+}
+
+if ($config.Survivor.ItemCount) {
+    $itemCountSlider.Value = [Math]::Min($config.Survivor.ItemCount, $itemCountSlider.Maximum)
+}
+
+# Load Killer Values from Config
+if ($config.Killer.CharCount) {
+    $charCountSliderK.Value = [Math]::Min($config.Killer.CharCount, $charCountSliderK.Maximum)
+}
+
+if ($config.Killer.PerkCount) {
+    $perkCountSliderK.Value = [Math]::Min($config.Killer.PerkCount, $perkCountSliderK.Maximum)
+}
+
+# Load Role from Config
 if ($config.LastRole -and $roleDropdown.Items.Contains($config.LastRole)) {
     $roleDropdown.SelectedItem = $config.LastRole
 } else {
-    # Fallback, falls ungültig
+    # Fallback
     $roleDropdown.SelectedItem = "Survivor"
 }
 
 function ApplySurvivor {
     param($cfg)
+        $optionsPanel.Text="Survivor Options"
+    $chk1.Text="Survivor";      $chk1.Checked=$cfg.Survivor.Options.Char
+    $chk2.Text="Perks";         $chk2.Checked=$cfg.Survivor.Options.Perks
+    $chk3.Text="Item";          $chk3.Checked=$cfg.Survivor.Options.Item; $chk3.Left = 10; $chk3.Top = 70; $chk3.Width = 100
+    $chk4.Text="Add-ons";       $chk4.Checked=$cfg.Survivor.Options.Addons
+    $chk5.Text="Offering";      $chk5.Checked=$cfg.Survivor.Options.Offering
+    $chk6.Text="Addon-Colours"; $chk6.Checked = $cfg.Survivor.Options.AddonColours
     $chk5.Visible=$true
-    $optionsPanel.Text="Survivor Options"
-    $chk1.Text="Survivor"; $chk1.Checked=$cfg.Survivor.Options.Char
-    $chk2.Text="Perks";    $chk2.Checked=$cfg.Survivor.Options.Perks
-    $chk3.Text="Item";     $chk3.Checked=$cfg.Survivor.Options.Item
-    $chk4.Text="Add-ons";  $chk4.Checked=$cfg.Survivor.Options.Addons
-    $chk5.Text="Offering"; $chk5.Checked=$cfg.Survivor.Options.Offering
+    $chk6.Visible=$true
+    $chk7.Visible = $false
+    $charCountSliderS.Visible = $true
+    $allCharsButtonS.Visible = $true
+    $charCountSliderK.Visible = $false
+    $allCharsButtonK.Visible = $false
+    $perkCountSliderS.Visible = $true
+    $perkCountSliderK.Visible = $false
+    $chkAura.Visible = $false
+    $chkGenerator.Visible = $false
+    UpdateItemSliderVisibility
 }
 function ApplyKiller {
     param($cfg)
     $optionsPanel.Text="Killer Options"
     $chk1.Text="Killer"; $chk1.Checked=$cfg.Killer.Options.Killer
     $chk2.Text="Perks";  $chk2.Checked=$cfg.Killer.Options.Perks
-    $chk3.Text="Addon-Colours"; $chk3.Checked=$cfg.Killer.Options.AddonColours
+    $chk3.Text="Addon-Colours"; $chk3.Checked=$cfg.Killer.Options.AddonColours; $chk3.Left = 115; $chk3.Top = 70; $chk3.Width = 120
     $chk4.Text="Offering"; $chk4.Checked=$cfg.Killer.Options.Offering
     $chk5.Visible=$false
+    $chk6.Visible=$false
+    $chk7.Visible = $true; $chk7.Text = "Add-ons"; $chk7.Checked = $cfg.Killer.Options.Addons
+    $charCountSliderS.Visible = $false
+    $allCharsButtonS.Visible = $false
+    $charCountSliderK.Visible = $true
+    $allCharsButtonK.Visible = $true
+    $perkCountSliderS.Visible = $false
+    $perkCountSliderK.Visible = $true
+    $chkAura.Visible = $true
+    $chkGenerator.Visible = $true
+    UpdateKillerPerkSlider
+    UpdateItemSliderVisibility
+}
+
+function UpdateItemSliderVisibility {
+    $showSlider = ($roleDropdown.SelectedItem -eq "Survivor") -and $chk3.Checked -and $chk6.Checked -and (-not $chk4.Checked)
+    $itemCountSlider.Visible = $showSlider
+    if ($itemCountLabel) {
+        $itemCountLabel.Visible = $showSlider
+    }
+}
+
+function UpdateKillerPerkSlider { 
+    $oldMax = $perkCountSliderK.Maximum
+    $newMax = 4
+    if ($chkAura.Checked) {
+        $newMax--
+    }
+    if ($chkGenerator.Checked) {
+        $newMax--
+    }
+    if ($newMax -lt 1) {
+        $newMax = 1
+    }
+    $perkCountSliderK.Maximum = $newMax
+    if ($newMax -gt $oldMax) {
+        $perkCountSliderK.Value = [Math]::Min($perkCountSliderK.Value + ($newMax - $oldMax), $newMax)
+    }
+    if ($perkCountSliderK.Value -gt $newMax) {
+        $perkCountSliderK.Value = $newMax
+    }
 }
 
 if ($roleDropdown.SelectedItem -eq "Survivor") { ApplySurvivor $config } else { ApplyKiller $config }
 $languageDropdown.SelectedItem = if ($roleDropdown.SelectedItem -eq "Survivor") { $config.Survivor.Language } else { $config.Killer.Language }
 
+$script:CheckboxSync = $false
+$chk4.Add_CheckedChanged({ 
+    if ($script:CheckboxSync) { return }
+    if ($chk4.Checked) {
+       $script:CheckboxSync = $true
+       $chk6.Checked = $false
+       $script:CheckboxSync = $false
+       }
+       UpdateItemSliderVisibility
+    })
+$chk6.Add_CheckedChanged({
+    if ($script:CheckboxSync) { return }
+    if ($chk6.Checked) {
+       $script:CheckboxSync = $true
+       $chk4.Checked = $false
+       $script:CheckboxSync = $false
+    }
+    UpdateItemSliderVisibility
+})
+$chkAura.Add_CheckedChanged({
+    UpdateKillerPerkSlider
+})
+$chkGenerator.Add_CheckedChanged({
+    UpdateKillerPerkSlider
+})
+$chk3.Add_CheckedChanged({
+    if ($script:CheckboxSync) { return }
+    if ($roleDropdown.SelectedItem -eq "Survivor" -and -not $chk3.Checked) {
+        $script:CheckboxSync = $true
+        $chk4.Checked = $false
+        $chk6.Checked = $false
+        $script:CheckboxSync = $false
+    }
+    if ($roleDropdown.SelectedItem -eq "Killer") {
+        if ($script:CheckboxSync) { return }
+        if ($chk3.Checked) {
+            $script:CheckboxSync = $true
+            $chk7.Checked = $false
+            $script:CheckboxSync = $false
+        }
+    }
+    UpdateItemSliderVisibility
+})
+$chk7.Add_CheckedChanged({
+    if ($roleDropdown.SelectedItem -ne "Killer") {
+        return
+    }
+    if ($script:CheckboxSync) {
+        return
+    }
+    if ($chk7.Checked) {
+        $script:CheckboxSync = $true
+        $chk3.Checked = $false
+        $script:CheckboxSync = $false
+    }
+})
 $roleDropdown.Add_SelectedIndexChanged({
     if ($roleDropdown.SelectedItem -eq "Survivor") {
         ApplySurvivor $config
     } else {
         ApplyKiller $config
     }
+    UpdateItemSliderVisibility
     $outputBox.Text=""
 })
-
+# Save Config #
 $saveButton.Add_Click({
     $m=$roleDropdown.SelectedItem
     $config.LastRole = $m
     if ($m -eq "Survivor") {
         $config.Survivor.Language=$languageDropdown.SelectedItem
+        $config.Survivor.CharCount = $charCountSliderS.Value
+        $config.Survivor.PerkCount = $perkCountSliderS.Value
+        $config.Survivor.ItemCount = $itemCountSlider.Value
         $config.Survivor.Options.Char=$chk1.Checked
         $config.Survivor.Options.Perks=$chk2.Checked
         $config.Survivor.Options.Item=$chk3.Checked
         $config.Survivor.Options.Addons=$chk4.Checked
         $config.Survivor.Options.Offering=$chk5.Checked
+        $config.Survivor.Options.AddonColours = $chk6.Checked
     } else {
         $config.Killer.Language=$languageDropdown.SelectedItem
+        $config.Killer.CharCount = $charCountSliderK.Value
+        $config.Killer.PerkCount=$perkCountSliderK.Value
         $config.Killer.Options.Killer=$chk1.Checked
         $config.Killer.Options.Perks=$chk2.Checked
         $config.Killer.Options.AddonColours=$chk3.Checked
         $config.Killer.Options.Offering=$chk4.Checked
+        $config.Killer.Options.Addons=$chk7.Checked
     }
     $outputBox.Text = if (Save-Config $configPath $config) {"Config Saved"} else {"Error saving"}
 })
@@ -301,9 +590,9 @@ $saveButton.Add_Click({
 $copyButton.Add_Click({
     if ($outputBox.Text.Trim() -ne "") {
         [System.Windows.Forms.Clipboard]::SetText($outputBox.Text)
-        $outputCopy.Text="Copied!"
-        Start-Sleep -Milliseconds 900
-        $outputCopy.Text=""
+        $outputStatus.Text = "Copied!"
+        Start-Sleep -Milliseconds 1000
+        $outputStatus.Text = ""
     }
 })
 
@@ -311,38 +600,94 @@ $exportButton.Add_Click({
     try {
         $exportFile = Join-Path $PSScriptRoot "export.txt"
         Set-Content -Path $exportFile -Value $outputBox.Text -Encoding UTF8
-        $outputExport.Text = "Exported!"
-        Start-Sleep -Milliseconds 900
-        $outputExport.Text = ""
+        $outputStatus.Text = "Exported!"
+        Start-Sleep -Milliseconds 1000
+        $outputStatus.Text = ""
     } catch {
-        $outputExport.Text = "Export failed!"
-        Start-Sleep -Milliseconds 900
-        $outputExport.Text = ""
+        $outputStatus.Text = "Export failed!"
+        Start-Sleep -Milliseconds 1000
+        $outputStatus.Text = ""
     }
 })
 
 $clearButton.Add_Click({
     try {
-        # Output-Feld leeren
+        # Clear Output Field
         $outputBox.Text = ""
 
-        # export.txt leeren
+        # Clear Output File (export)
         $exportFile = Join-Path $PSScriptRoot "export.txt"
         if (Test-Path $exportFile) {
             Clear-Content -Path $exportFile -ErrorAction SilentlyContinue
         }
 
-        # Label anzeigen
-        $outputClear.Text = "Cleared!"
-        Start-Sleep -Milliseconds 900
-        $outputClear.Text = ""
+        # Show Label
+        $outputStatus.Text = "Cleared!"
+        Start-Sleep -Milliseconds 1000
+        $outputStatus.Text = ""
     } catch {
-        $outputClear.Text = "Clear failed!"
-        Start-Sleep -Milliseconds 900
-        $outputClear.Text = ""
+        $outputStatus.Text = "Clear failed!"
+        Start-Sleep -Milliseconds 1000
+        $outputStatus.Text = ""
     }
 })
 
+
+$appendButton.Add_Click({
+    $oldText = $outputBox.Text
+    $script:IsAppending = $true
+    $button.PerformClick()
+    $script:IsAppending = $false
+    # APPEND Label
+    $outputStatus.Text = "Appended!"
+    Start-Sleep -Milliseconds 1000
+    $outputStatus.Text = ""
+     
+})
+
+$flipCoinButton.Add_Click({
+    $randomRole = Get-Random @("Survivor", "Killer")
+        # Role switch
+    if ($roleDropdown.SelectedItem -ne $randomRole) {
+        $roleDropdown.SelectedItem = $randomRole
+    }
+    $outputBox.Text = "Next Round as $randomRole"
+    # FLIP COIN Label
+    $outputStatus.Text = "Coin flipped!"
+    Start-Sleep -Milliseconds 1000
+    $outputStatus.Text = ""
+})
+
+###### RENDER - BLOCK ######
+
+function Render-NoHeader {
+    param($r,$lang)
+    $text = Render $r $lang
+    $lines = $text -split "`r?`n"
+    if ($lines.Count -gt 1) {
+        return (($lines | Select-Object -Skip 1) -join "`r`n")
+    }
+ return $text
+}
+
+function Render-History {
+    param($history,$lang) 
+    if (-not $history -or $history.Count -eq 0) {
+        return ""
+    }
+    $out = @()
+    for ($i = 0; $i -lt $history.Count; $i++) {
+        $entry = $history[$i]
+        if ($i -eq 0) {
+            $out += Render $entry $lang
+        } else {
+            $out += "--------------------"
+            $out += ""
+            $out += (Render-NoHeader $entry $lang)
+            }
+    }
+    return ($out -join "`r`n")
+}
 
 function Render {
     param($r,$lang)
@@ -351,29 +696,47 @@ function Render {
     $o=@()
     if ($r.role -eq "Survivor") {
         $o+="SURVIVOR - $suf"
-        if ($r.options.Char) { $o+="Survivor: $(Get-DisplayName $r.charRow $col)" }
+        if ($r.options.Char) { $o += "Survivor: " + (($r.charRows | ForEach-Object { Get-DisplayName $_ $col}) -join " / ") }
         if ($r.options.Perks) { $o+="Perks: " + (($r.perkRows | ForEach-Object {Get-DisplayName $_ $col}) -join " / ") }
-        if ($r.options.Item) { $o+="Item: $(Get-DisplayName $r.itemRow $col)" }
-        if ($r.options.Addons) {
-            if ($r.addonsSelected.Count -eq 1 -and $r.addonsSelected[0] -eq "none") {
-                $o+="Add-ons: none"
+        # Items & Add-ons and Addon-Colours
+        if ($r.options.Item) {
+            if ($r.itemColourRows -and $r.itemColourRows.Count -gt 0) {
+                $idx = 1
+                foreach ($entry in $r.itemColourRows) {
+                    $itemName = Get-DisplayName $entry.Item $col
+                    $comboName = Get-DisplayName $entry.Combo $col
+                    $o += "Item ${idx}: $itemName [Addons: $comboName]"
+                    $idx++
+                }
             } else {
-                $o+="Add-ons: " + (($r.addonsSelected | ForEach-Object {Get-DisplayName $_ $col}) -join " / ")
+                $itemText = "Item: $(Get-DisplayName $r.itemRow $col)"
+                if ($r.addonsSelected.Count -gt 0 -and $r.addonsSelected[0] -ne "none") {
+                    $itemText += " [Addons: " + (($r.addonsSelected | ForEach-Object {
+                        Get-DisplayName $_ $col}) -join " / ") + "]"
+                    }
+                    $o += $itemText
+                }
             }
+        if ($r.options.Addons) { if ($r.addonsSelected.Count -eq 1 -and $r.addonsSelected[0] -eq "none") { $o+="Add-ons: none"
+            } else {
+                $o+="Add-ons: " + (($r.addonsSelected | ForEach-Object { Get-DisplayName $_ $col}) -join " / ")}}
+        if ($r.options.Offering) { $o+="Offering: $(Get-DisplayName $r.offRow $col)"}
+            } else { # here starts the Killer Block
+               $o+="KILLER - $suf"
+        if ($r.options.Killer) { $o += "Killer: " + (($r.charRows | ForEach-Object {Get-DisplayName $_ $col}) -join " / ")}
+        if ($r.options.Perks) { $o+="Perks: " + (($r.perkRows | ForEach-Object {Get-DisplayName $_ $col}) -join " / ")}
+        if ($r.options.Addons) { $o += "Add-ons: " + (($r.addonRows | ForEach-Object { Get-DisplayName $_ $col}) -join " / ")}
+        if ($r.options.AddonColours) {  $o += "Addon-Colours: $(Get-DisplayName $r.addonComboRow $col)"}
+        if ($r.options.Offering) { $o+="Offering: $(Get-DisplayName $r.offRow $col)"
         }
-        if ($r.options.Offering) { $o+="Offering: $(Get-DisplayName $r.offRow $col)" }
-    } else {
-        $o+="KILLER - $suf"
-        if ($r.options.Killer) { $o+="Killer: $(Get-DisplayName $r.charRow $col)" }
-        if ($r.options.Perks) { $o+="Perks: " + (($r.perkRows | ForEach-Object {Get-DisplayName $_ $col}) -join " / ") }
-        if ($r.options.AddonColours) { $o+="Add-ons: $(Get-DisplayName $r.addonComboRow $col)" }
-        if ($r.options.Offering) { $o+="Offering: $(Get-DisplayName $r.offRow $col)" }
-    }
-    return ($o -join "`r`n")
+    } return ($o -join "`r`n")
 }
 
 $script:lastResult=$null
+$script:ResultHistory = @()
+$script:IsAppending = $false
 
+# GO Button
 $button.Add_Click({
     $role=$roleDropdown.SelectedItem
     $lang=$languageDropdown.SelectedItem
@@ -390,52 +753,136 @@ $button.Add_Click({
             if ($chars.Count -eq 0 -or $perks.Count -eq 0 -or $items.Count -eq 0) { throw "Missing CSV data" }
 
             $map=Build-CategoryMap $dir
-
-            $char=Get-Random $chars
-            $perkCount = if ($perks.Count -ge 4) {4} else {$perks.Count}
+            #Char
+            $charCount = [Math]::Min($charCountSliderS.Value, $chars.Count)
+            $charRows = Get-Random $chars -Count $charCount
+            $desiredPerks = $perkCountSliderS.Value
+            $perkCount = [Math]::Min($desiredPerks, $perks.Count)
             $perkRows = if ($perkCount -gt 0) { Get-Random $perks -Count $perkCount } else { @() }
             $off = if ($offer.Count -gt 0) { Get-Random $offer } else { $null }
+            #Items-Addons-AddonColours
             $item = Get-Random $items
-
             $iname = Get-DisplayName $item $col
             $norm = NormalizeKey $iname
             $code = if ($norm -and $map.ContainsKey($norm)) { $map[$norm] } else { "none" }
-
-            $addons=@("none")
-            if ($code -ne "none") {
-                $all=SafeArray (Read-CsvSafe (Join-Path $dir "addons_Survivors.csv"))
-                $valid = $all | Where-Object { $_.itemCategory -eq $code }
-                if ($valid.Count -gt 0) {
-                    $cnt=Get-Random -Minimum 0 -Maximum 3
-                    if ($cnt -gt 0) { $addons = SafeArray (Get-Random $valid -Count ([Math]::Min($cnt,$valid.Count))) }
+            $addons = @("none")
+            $selectedItems = @()
+            if ($chk6.Checked) {
+                $itemCount = $itemCountSlider.Value
+                $allColours = SafeArray (Read-CsvSafe (Join-Path $dir "addonsColours_Both.csv"))
+                for ($i = 0; $i -lt $itemCount; $i++) {
+                    $randomItem = Get-Random $items
+                    $colourRow = Get-Random $allColours
+                    $selectedItems += [PSCustomObject]@{
+                        Item = $randomItem
+                        Combo = $colourRow
+                    }
+                }
+ 
+            } else {
+                if ($code -ne "none") {
+                    $all = SafeArray (Read-CsvSafe (Join-Path $dir "addons_Survivors.csv"))
+                    $valid = $all | Where-Object {
+                        $_.itemCategory -eq $code
+                    }
+                    if ($valid.Count -gt 0) {
+                        $cnt = Get-Random -Minimum 0 -Maximum 3
+                        if ($cnt -gt 0) {
+                            $addons = SafeArray (Get-Random $valid -Count ([Math]::Min($cnt,$valid.Count)))
+                        }
+                    }
                 }
             }
-
+            $addons=@("none")
+ 
+        if ($chk6.Checked) {
+            # Addon-Colours Mode
+            if ($code -ne "X") { 
+                $all = SafeArray (Read-CsvSafe (Join-Path $dir "addonsColours_Both.csv")) 
+                if ($all.Count -gt 0) {
+                    $addons = @(Get-Random $all) 
+                }
+            }
+        } else {
+                # Normal Addons
+                if ($code -ne "none") {
+                    $all = SafeArray (Read-CsvSafe (Join-Path $dir "addons_Survivors.csv")) 
+                    $valid = $all | Where-Object {
+                        $_.itemCategory -eq $code
+                    }
+                if ($valid.Count -gt 0) {
+                    $cnt=Get-Random -Minimum 0 -Maximum 3
+                    if ($cnt -gt 0) {
+                        $addons = SafeArray (Get-Random $valid -Count ([Math]::Min($cnt,$valid.Count)))
+                    }
+                }
+            }
+        }
             $script:lastResult=@{
-                role="Survivor"; charRow=$char; perkRows=$perkRows; itemRow=$item; itemCode=$code; addonsSelected=$addons; offRow=$off;
+                role="Survivor"; charRows=$charRows; perkRows=$perkRows; itemRow=$item; itemCode=$code; addonsSelected=$addons; itemColourRows=$selectedItems; offRow=$off;
                 options=@{Char=$chk1.Checked;Perks=$chk2.Checked;Item=$chk3.Checked;Addons=$chk4.Checked;Offering=$chk5.Checked}
             }
-            $outputBox.Text = Render $script:lastResult $lang
-
+            if ($script:IsAppending) {
+                $script:ResultHistory += $script:lastResult
+                $outputBox.Text = Render-History $script:ResultHistory $lang
+            } else {
+                    $script:ResultHistory = @($script:lastResult)
+                    $outputBox.Text = Render $script:lastResult $lang
+            }
         } else {
             $chars=SafeArray (Read-CsvSafe (Join-Path $dir "chars_Killer.csv"))
             $perks=SafeArray (Read-CsvSafe (Join-Path $dir "perks_Killer.csv"))
+            $auraPerks = SafeArray (Read-CsvSafe (Join-Path $dir "perks_Killer_AuraAlert.csv"))
+            $generatorPerks = SafeArray (Read-CsvSafe (Join-Path $dir "perks_Killer_Generator.csv"))
             $offer=SafeArray (Read-CsvSafe (Join-Path $dir "offerings_Killer.csv"))
-            $addons=SafeArray (Read-CsvSafe (Join-Path $dir "addonsColours_Killer.csv"))
-
+            $addons=SafeArray (Read-CsvSafe (Join-Path $dir "addonsColours_Both.csv")) #Addon-Colours
+            $killerAddons = SafeArray (Read-CsvSafe (Join-Path $dir "addons_Killer.csv"))
             if ($chars.Count -eq 0 -or $perks.Count -eq 0) { throw "Missing CSV data" }
-
-            $char=Get-Random $chars
-            $perkCount = if ($perks.Count -ge 4) {4} else {$perks.Count}
-            $perkRows = if ($perkCount -gt 0) { Get-Random $perks -Count $perkCount } else { @() }
+            # Chars
+            $charCount = [Math]::Min($charCountSliderK.Value,$chars.Count) 
+            $charRows = Get-Random $chars -Count $charCount
+            # Perks
+            $perkRows = @()
+            $desiredPerks = $perkCountSliderK.Value
+            if ($desiredPerks -gt 0) {
+                $perkRows += SafeArray(Get-Random $perks -Count ([Math]::Min($desiredPerks, $perks.Count)))
+            }
+            if ($chkAura.Checked -and $auraPerks.Count -gt 0) { 
+                $availableAura = $auraPerks | Where-Object {
+                    $_.en_Name -notin $perkRows.en_Name
+                }
+                if ($availableAura.Count -gt 0) {
+                    $perkRows += Get-Random $availableAura
+                }
+            }
+            if ($chkGenerator.Checked -and $generatorPerks.Count -gt 0) { 
+                $availableGenerator = $generatorPerks | Where-Object {
+                   $_.en_Name -notin $perkRows.en_Name
+                }
+                if ($availableGenerator.Count -gt 0) {
+                    $perkRows += Get-Random $availableGenerator
+                }
+            }
+            $addonRows = @()
+            if ($killerAddons.Count -gt 0) {
+                $addonRows = SafeArray (Get-Random $killerAddons -Count ([Math]::Min(2,$killerAddons.Count)
+        )
+    )
+}
             $off = if ($offer.Count -gt 0) { Get-Random $offer } else { $null }
             $addon = if ($addons.Count -gt 0) { Get-Random $addons } else { $null }
 
             $script:lastResult=@{
-                role="Killer"; charRow=$char; perkRows=$perkRows; addonComboRow=$addon; offRow=$off;
-                options=@{Killer=$chk1.Checked;Perks=$chk2.Checked;AddonColours=$chk3.Checked;Offering=$chk4.Checked}
+                role="Killer"; charRows=$charRows; perkRows=$perkRows; addonRows=$addonRows; addonComboRow=$addon; offRow=$off;
+                options=@{Killer=$chk1.Checked;Perks=$chk2.Checked;Addons=$chk7.Checked;AddonColours=$chk3.Checked;Offering=$chk4.Checked}
             }
-            $outputBox.Text = Render $script:lastResult $lang
+            if ($script:IsAppending) { 
+                $script:ResultHistory += $script:lastResult
+                $outputBox.Text = Render-History $script:ResultHistory $lang
+                } else { 
+                    $script:ResultHistory = @($script:lastResult)
+                    $outputBox.Text = Render $script:lastResult $lang
+                }
         }
     } catch {
         $outputBox.Text="Error loading data: $($_.Exception.Message)"
@@ -443,19 +890,19 @@ $button.Add_Click({
 })
 
 $switchButton.Add_Click({
-    if ($script:lastResult) {
-        $cur=$languageDropdown.SelectedItem
-        $other=if ($cur -eq "Deutsch") {"English"} else {"Deutsch"}
-        $languageDropdown.SelectedItem=$other
-        $outputBox.Text = Render $script:lastResult $other
+    if ($script:ResultHistory.Count -gt 0) {
+        $cur = $languageDropdown.SelectedItem
+        $other = if ($cur -eq "Deutsch") { "English" } else { "Deutsch" }
+        $languageDropdown.SelectedItem = $other
+        $outputBox.Text = Render-History $script:ResultHistory $other
     }
 })
 
 $bothButton.Add_Click({
-    if ($script:lastResult) {
-        $cur=$languageDropdown.SelectedItem
-        $other=if ($cur -eq "Deutsch") {"English"} else {"Deutsch"}
-        $outputBox.Text = (Render $script:lastResult $cur) + "`r`n`r`n" + (Render $script:lastResult $other)
+    if ($script:ResultHistory.Count -gt 0) {
+        $cur = $languageDropdown.SelectedItem
+        $other = if ($cur -eq "Deutsch") { "English" } else { "Deutsch" }
+        $outputBox.Text = (Render-History $script:ResultHistory $cur) + "`r`n`r`n====================`r`n`r`n" + (Render-History $script:ResultHistory $other)
     }
 })
 

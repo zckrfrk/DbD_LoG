@@ -2,21 +2,28 @@
     "Survivor":  {
                      "Options":  {
                                      "Offering":  true,
-                                     "Char":  false,
+                                     "Char":  true,
                                      "Perks":  true,
                                      "Item":  true,
-                                     "Addons":  true
+                                     "Addons":  true,
+                                     "AddonColours":  false
                                  },
-                     "Language":  "Deutsch"
+                     "Language":  "Deutsch",
+                     "PerkCount":  4,
+                     "ItemCount":  1,
+                     "CharCount":  1
                  },
     "Killer":  {
                    "Language":  "Deutsch",
+                   "PerkCount":  2,
+                   "CharCount":  1,
                    "Options":  {
                                    "Killer":  false,
-                                   "AddonColours":  true,
+                                   "Addons":  true,
+                                   "AddonColours":  false,
                                    "Perks":  true,
-                                   "Offering":  true
+                                   "Offering":  false
                                }
                },
-    "LastRole":  "Survivor"
+    "LastRole":  "Killer"
 }

@@ -1,305 +1,150 @@
-## README ZUR VERSION 4.0.1 - Bugfixes + kleine Änderungen zum SÜNDHAFT-GROẞEN-UPDATE ##
+DbD_LoG
+Dead by Daylight Loadout Generator
+by Zckrfrk
 
-HUHW zu meinem Tool, mit welchem man sich für Dead by Daylight zufällig Charaktere, Perks, Items, Addons und Opfergaben auswählen kann. Viel Spaß damit!
-Es ist lange noch nicht perfekt, deshalb bitte ich, mir Auffälligkeiten (Fehler, Probleme, Vorschläge und Verbesserungsvorschläge) gerne auf Discord oder via Mail mitzuteilen: zckrfrk.business@t-online.de. Vielen Dank!
+Copyright © 2025-2026 Zckrfrk
+Licensed under the MIT License. See the LICENSE file for details.
 
-Zum Starten des Tools musst du nur im entpackten Ordner die BAT-Datei doppelklicken: "DBD Loadout Generator - SurvCore Editon.bat".
+README
+German version: LIESMICH.txt
 
-Um eine Verknüpfung auf dem Desktop zu erstellen, kannst du auf die jeweilige Batch-Datei ("DBD Loadout Generator - SurvCore Editon.bat") rechtsklicken und Senden An > Desktop (Verknüpfung erstellen) auswählen.
+## README ZUR VERSION 5.0 - SURVCORE LEAGUE + RENAMING UPDATE ##
 
-Bei Verwendung des Tools gerne meinen Namen "@zckrfrk" erwähnen/angeben, ich freue mich immer! :DD
+►►► HOW TO DOWNLOAD THE TOOL: Click on the green button labeled '<> Code' and then select 'Download ZIP.' After downloading, extract the tool to a folder of your choice (Little tip: set the folder as a 'Quick Access' in your Windows Explorer).
 
-Weitere Links:
-Link zu Git: https://github.com/zockerfreak/DeadByDaylight_Randomizer-SurvCoreEdition
-Discord: https://discord.gg/xSXKYzK
-Youtube: https://www.youtube.com/@zckrfrk
+HUHW! Here’s my tool that lets you randomly choose characters, perks, items, addons, and offerings for Dead by Daylight. Have fun with it!
+
+It’s far from perfect yet, so please feel free to report any issues (bugs, problems, suggestions, and improvement ideas) to me on Discord or via email: zckrfrk.business@t-online.de. Thanks a lot!
+
+All updates for the tool will be announced first in this Discord channel: https://discord.gg/xAs6VRExbF
+
+To start the tool, just double-click the BAT file in the extracted folder: 'DeadbyDaylight_LoadoutGenerator.bat'.
+
+To create a shortcut on the desktop, you can right-click on the respective batch file ('DeadbyDaylight_LoadoutGenerator.bat') and select Send To > Desktop (create shortcut).
+
+If you use the tool, feel free to mention/give my name '@zckrfrk', I always appreciate it! :DD
+
+More links:
+Git: https://github.com/zckrfrk/DbD_LoG
+YouTube: https://www.youtube.com/@zckrfrk
 Streams: https://zfstream.de
+more: https://linktr.ee/zckrfrk
 
-Danke, dass du mein Tool nutzt!
+Thanks for using my tool!
 
-Beste Grüße,
+Best regards,
 Mari aka Zckrfrk
 
-►► ERKLÄRUNG DES TOOLS ◄◄
-Da das Tool auf den ersten Blick eventuell etwas erschlagend aussehen könnte, gebe ich hiermit eine kleine Anleitung zum Besten, in dem ich auf jedes Element des Tools genauer eingehe.
-► Tool als Fenster: Beim Öffnen der .BAT-Datei öffnen sich zwei Fenster (eines mit einem schwarzen Logo und eines mit einem blauen Logo). Das mit dem schwarzen Logo ist für das automatische Öffnen des anderen Fensters da und kann ignoriert werden. Um das Fenster des Tools aufzurufen, wenn es schon per .BAT-Datei geöffnet wurde, ist das Fenster mit dem blauen Logo (Powershell) notwendig. Wenn das Tool (Fenster mit blauem Logo) geschlossen wird, dann schließt sich das andere Fenster (schwarzes Logo) gleich mit.
-► Role: Im Dropdown-Menü kann man zwischen Survivor und Killer auswählen. Klickt man auf das Dropdown-Fenster und dann auf die jeweilig andere Rolle, ändern sich die Optionen der Rolle.
-► Language: Hier kann die Sprache für die Augabe angepasst werden. Spielst du DbD auf Englisch? - Dann wähle "English" aus, spielst du es auf Deutsch, dann natürlich "Deutsch".
-► Save Config: Dieser Button speichert die aktuelle Sprache, die aktuelle Rolle als Startrolle des Tools und die aktuellen Optionen der jeweiligen Rolle ("Survivor Options" bzw. "Killer Options")
-► Survivor Options: In diesem Bereich kannst du anhaken, was du für deinen Survivor generieren möchtest. Nur sichtbar, wenn der Mode auf "Survivor" steht.
-► Killer Options: In diesem Bereich kannst du anhaken, was du für deinen Killer generieren möchtest. Nur sichtbar, wenn der Mode auf "Killer" steht.
-► Survivor: Diese Checkbox sorgt dafür, dass angehakt auch ein Survivor-Name generiert wird.
-► Killer: Diese Checkbox sorgt dafür, dass angehakt auch ein Killer-Name generiert wird.
+►► TOOL EXPLANATION ◄◄
+Since the tool might look a bit overwhelming at first glance, here's a little guide where I go over each element of the tool in more detail.
+► Tool as a window: When opening the .BAT file, two windows appear (one with a black logo and one with a blue logo). The one with the black logo is for automatically opening the other window and can be ignored. To access the tool window once it has already been opened via the .BAT file, you need the window with the blue logo (Powershell). If the tool (window with blue logo) is closed, the other window (black logo) closes immediately as well.
+► Role: In the dropdown menu, you can choose between Survivor and Killer. If you click on the dropdown menu and then select the other role, the options for the role will change.
+► Language: Here you can adjust the language for the output. Are you playing DbD in English? - Then select 'English,' if you play it in German, then of course 'Deutsch.' 
+► Save Config: This button saves the current language, the current role as the tool's starting role, and the current options for the respective role ('Survivor Options' or 'Killer Options').
+► Survivor Options: In this section, you can check what you want to generate for your survivor. Only visible when the mode is set to 'Survivor.' 
+► Killer Options: In this section, you can check what you want to generate for your killer. Only visible when the mode is set to 'Killer.'
+► Survivor: This checkbox makes sure that a survivor name is also generated when checked.
+► Killer: This checkbox makes sure that a killer name is also generated when checked.
+► Slider next to Survivor or Killer: This slider is used to select the number of survivors to generate.
+► all: Mit Klick auf diesen Button wird die Anzahl aller momentan im Spiel existierenden Survivor bzw. Killer gesetzt.
 ► Perks: Diese Checkbox sorgt dafür, dass angehakt auch vier Perks für die jeweilig aktive Rolle generiert wird.
-► Item: Diese Checkbox sorgt dafür, dass angehakt auch ein Item für deinen Survivor generiert wird.
-► Add-ons: Diese Checkbox sorgt dafür, dass angehakt auch Add-ons für das Item für deinen Survivor generiert wird.
-► Addon-Farben: Diese Checkbox sorgt dafür, dass angehakt eine Addon-Kombination aus zwei Farben für deinen Killer generiert wird. Dies ist vor allem in Turnier-Kontexten angebracht, damit nicht zu starke Addons genutzt werden.
-► Offering: Diese Checkbox sorgt dafür, dass angehakt eine Opfergabe für die jeweilig aktive Rolle generiert wird.
-► GO: Dieser Button generiert ein Loadout, abhängig von der im Mode angegebenen Rolle, den in den Options (Survivor Options oder Killer Options) angehakten Checkboxen und der in Language angegebenen Sprache.
-► switch: Dieser Button kann verwendet werden, wenn du ein Loadout generiert hast, dies aber in der jeweils anderen Sprache angezeigt haben möchtest.
-► both: Dieser Button kann verwendet werden, wenn du ein Loadout generiert hast, dies aber zusätzlich zu der momentan ausgewählten Sprache noch in der jeweils anderen Sprache angezeigt haben möchtest.
-► COPY: Dieser Button speichert dein generiertes Loadout in der Zwischenablage, sodass du es z.B. in einem Chat oder einer manuell einfügen kannst.
-► EXPORT: Dieser Button speichert dein generiertes Loadout in der TXT-Datei "export", welche sich im gleichen Ordner, wie die .BAT-Datei befindet.
-► CLEAR: Dieser Button entfernt dein generiertes Loadout aus dem Ausgabefenster des Tool und leert die TXT-Datei "export" vollständig.
-► OBS-Einbindung: Das Tool kann in OBS (und ähnliche Softwares) eingebunden werden. Dies geschieht mithilfe der TXT-Datei "export". In OBS angekommen kannst du über das Plus (+) eine neue "Text (GDI+)" Quelle hinzufügen, z.B. mit dem Namen "export". In den Eigenschaften der OBS-Quelle musst du nun den Haken "Aus Datei lesen" setzen und mithilfe des Buttons "Durchsuchen" in den Pfad des Skripts navigieren und die TXT-Datei "export" auswählen. Du kannst nun weiter in den Einstellungen herumprobieren, wie du die TXT-Datei eingeblendet haben willst. Ich empfehle folgende Einstellungen: 1. Schriftgröße 60 | 2. Vertikale Ausrichtung: Unten | 3. Benutzerdefinierten Textbereich benutzen: anhaken (Breite: 1920, Höhe 1080) | 4. Zeilenumbruch: anhaken. Zudem kann der OBS-Quelle noch ein Hotkey hinterlegt werden (Einstellungen > Hotkeys). Jedoch kann auch mit dem CLEAR-Button in meinem Tool gearbeitet werden, dann wird das Loadout auch nicht mehr angezeigt, bis das nächste generiert wird.
-► Bei weiteren Fragen kontaktiert mich gerne über die oben stehenden Links!
+► Slider to the right of Perks: This slider is used to select the number of perks to be generated for Killers (1-4) or Survivors (1-16).
+► extra Aura/Alert: This checkbox, when checked, guarantees the generation of a Killer perk from the Aura/Alert category (see 'perks_Killer_AuraAlert.csv' in the 'data' subfolder).
+► extra Generator: This checkbox, when checked, guarantees the generation of a Killer perk from the Generator category (see 'perks_Killer_Generator.csv' in the 'data' subfolder).
+► Item: Checking this box ensures that an item is generated for your Survivor.
+► Slider to the right of Item: Here you can spend on addon colors for multiple items. This slider is only visible when you are on the Survivor side and have 'Addon-Colours' checked.
+► Add-ons: Checking this box ensures that add-ons for the item for your Survivor or add-ons for the Killer are generated.
+► Addon Colors: Checking this box ensures that an addon combination of two colors is generated for your Killer or Survivor. This is primarily intended for tournaments to prevent the use of overly powerful add-ons.
+► Offering: Checking this box ensures that an offering is generated for the currently active role.
+► GO: This button generates a loadout based on the role specified in Mode, the checkboxes selected in Options (Survivor Options or Killer Options), and the language specified in Language.
+► switch: This button can be used if you have generated a loadout but want to display it in the other language.
+► both: This button can be used if you have generated a loadout but want to display it in both the currently selected language and the other language.
+► COPY: This button saves your generated loadout to the clipboard, allowing you to paste it manually into a chat or other format.
+► APPEND: This button adds another loadout below the last generated one.
+► EXPORT: This button saves your generated loadout to the TXT file 'export'. Located in the same folder as the .BAT file.
+► COINFLIP: This button makes the decision for you if you're unsure whether to play as Killer or Survivor in the next round. The tool also switches to the generated role.
+► CLEAR: This button removes your generated loadout from the tool's output window and completely clears the export TXT file.
+► OBS Integration: The tool can be integrated into OBS (and similar software). This is done using the 'export' TXT file. Once in OBS, you can add a new 'Text (GDI+)' source using the plus (+) icon, for example, named 'export'. In the OBS source properties, you need to check the 'Read from file' box and use the 'Browse' button to navigate to the script's path and select the 'export' TXT file. You can now experiment with the settings to determine how you want the TXT file to be displayed. I recommend the following settings: 1. Font size: 60 | 2. Vertical alignment: Bottom | 3. Use custom text area: check (Width: 1920, Height: 1080) | 4. Line wrapping: check. Additionally, a hotkey can be assigned to the OBS source (Settings > Hotkeys). However, you can also use the CLEAR button in my tool; then the loadout will no longer be displayed until the next one is generated.
+► GitHub: This link leads to the GitHub page for the tool.
+► Discord (Updates/Feedback/Bug Report): This link leads to the Discord server of the "SurvCore League," for which the tool was originally intended. There is a "DbD_LoG" section where you can find information about new updates, leave feedback/suggestions for improvement, and report errors or bugs in the tool so they can be fixed soon.
+► Zckrfrk: This link leads to my Linktree with all my links, which also lead to my other Linktrees.
+► README: This link leads directly to the README on the GitHub page, which refers to the file "README.txt".
+► data: This subfolder contains the CSV files from which the loadouts are generated. These can be modified at any time. However, it is important that when making changes, the entire line of the CSV is deleted or added to avoid problems.
+► If you have any further questions, please feel free to contact me via the links above!
 
 
-# CHANGELOG #
-Zur leichteren Lesbarkeit wird das de oder en vor dem Dateinamen hier im Changelog weggelassen.
+########################
+### current version: ###
+########################
 
-#########################
-### aktuelle Version: ###
-#########################
+ ────────────────────────────────────┐
+  VERSION 5.0 - SURVCORE LEAGUE + RENAMING UPDATE
+└────────────────────────────────────
 
- ─────────────────────────────────────────────────────┐
-  VERSION 4.0.1 - Bugfixes + kleine Änderungen zum SÜNDHAFT-GROẞEN-UPDATE  
-└─────────────────────────────────────────────────────
+→ Version 5.0 - Update from 13.11.2026 - DbD Version 10.2.2 ←
 
-→ SurvCore Editon Version 4.0.1 - Update vom 13.09.2026 - DbD Version 10.1.2 ←
+EXCITING SUMMARY
+○ Multiple outputs are now possible! The new 'APPEND' button does just that!
+○ 'switch' & 'both' now also work with 'APPEND'!
+○ Selecting the quantity for perks, characters, and more is now possible!
+○ Exciting new checkboxes for Survivor and Killer!
+○ Cool new sliders added!
+○ Additional settings for tournament situations added!
+○ Changes also on GitHub!
+○ A dedicated Discord section with multiple channels was created for the tool and linked in the README, among other places.
+○ All further information can be found above in the tool's explanation or below in the additional changelog points!
 
-1. Bugfixes
-• Problem behoben, bei dem die "Offering" Checkbox bei "Survivor" gefehlt hatte, wenn von "Surv" auf Killer und dann wieder zurück gewechselt wurde
-• Problem behoben, bei dem die Language automatisch zu "Deutsch" gesprungen ist, wenn Language "English" ausgewählt war und Role geändert wurde
+1. New Features
+• Added a new 'APPEND' button to allow multiple generated loadouts to be displayed one after the other
+• Adjusted the logic so that the 'switch' and 'both' buttons now also work with 'APPEND'
+• You can now select how many perks should be displayed at once (Survivor: 1-16 / Killer: 1-4)
+• Added a 'Addon Colors' checkbox for Survivors (this will now display two colors according to tournament rules for the addons)
+• Additional output of up to four items with two addon colors
+• All characters (Killer or Survivor) can now be displayed in random order (slider + 'All' button added next to the 'Survivor' and 'Killer' checkboxes)
+• On the Killer side, you can now check whether an Aura and/or a Generator perk should be guaranteed to be generated (new 'extra Aura' and 'Extra Aura' buttons) 'Extra Generator')
+• On the Killer side, in addition to the addon colors, addons can now also be generated (since each Killer has the same number of red (2), purple (4), blue (5), green (5), and brown (4) addons, the color and a corresponding number are displayed).
+• CSVs created: perks_Killer_Aura & perks_Killer_Generator & addons_Killer
+• Configuration extended for the above-mentioned new features
 
-2. Änderungen
-• Checkbox "Addon-Farben" in "Addon-Colours" umbenannt
-• "Mode" in "Role" umbenannt (sowohl in der GUI als auch im Skript)
-• alle "Anführungsstriche" aus der CSV-Datei "items_Survivors" entfernt (wurden zuvor ebenso in der Ausgabe der GUI angezeigt)
-• Erklärung des Tools im README angepasst: Mode → Role / Inhalt des Punktes "Save Config" / fehlenden Punkt "Killer" hinzugefügt
+2. Adjustments/Renaming
+• GitHub page & folder: 'DeadByDaylight_Randomizer-SurvCoreEdition' → 'DbD_LoG'
+• GitHub name: 'zockerfreak' → 'zckrfrk'
+• Link updated: https://github.com/zckrfrk/DbD_LoG
+• CSV filename 'addonsColours_Killer' → 'addonsColours_Both'
+• Tool renamed throughout to 'DbD_LoG' (BAT file now: 'DeadbyDaylight_LoadoutGenerator.bat')
+• A new release for version 5.0 has been created on GitHub (older versions are available under old branches).
 
-3. Neue Funktionalität
-• Feature hinzugefügt, dass nun auch die zuletzt verwendete Rolle in der Config mitgespeichert wird (sodass Killer-Mains nicht immer von der Surv-Rolle wechseln müssen beim Start des Tools)
+3. README
+• Added short download instructions on how to download the tool
+• Adjusted introductory text (including adding a link to a dedicated Discord channel for the tool)
+• Updated the general section '# MORE INFO #'
+• Corrected formatting and spelling errors and other minor issues
+• Adjusted the tool's description and added new sections
+• Added a Vibe Coding Disclaimer at the end of the document
+• Starting with DbD_LoG version 5.0, the README is now available in both German and English (A new README has been created: The former main README has been renamed "LIESMICH" and the new English README has become the main README)
 
-
-############################
-### ehemalige Versionen: ###
-############################
-
-
-# VERSION 4.0 - SÜNDHAFT-GROẞES-UPDATE #
-
-SurvCore Editon Version 4.0 - Update vom 27.08.2026 - DbD Version 10.1.0
-
-1. Skripte für Survivor und Killer zusammengelegt und mit vielerlei neuen Features versehen:
-• Nun können Killer- und Surv-Loadouts innerhalb eines Tools generiert werden
-• Möglichkeit eingebaut, anzuhaken, was generiert werden soll
-• Smarter Sprachenwechsel & Anzeige des generierten Loadouts in zwei Sprachen gleichzeitig
-• Möglichkeit eingebaut, generiertes Loadout direkt in OBS anzuzeigen (per TXT-File)
-• Neue Buttons hinzugefügt: Save Config, switch, both, EXPORT, CLEAR
-• "Generieren"-Button wurde zum "GO"-Button
-• weitere Updates, um das Tool mit weiteren Funktionen zu füttern und umfangreicher zu gestalten
-• meinen Namen in der UI-Überschrift hinzugefügt
-
-2. Neue Perknamen und Charaktere hinzugefügt:
-◘ Das Urteil / The Judgment
-• perks_Killer: Verheeren ↔ Lay Waste; Fluch: Unter deiner Knute ↔ Hex: Under your Thumb; Himmlischer Zeuge ↔ Celestial Witness
-◘ Aurora Stardotter
-• perks_Survivors: Ruf der Erlösung ↔ Salvation's Cry; Segen: Standhaft ↔ Boon: Steadfast; Früchte deiner Arbeit ↔ Fruits of your Labor
-
-3. Neue Perknamen (in Klammern) ergänzt von entfernten Charakteren:
-◘ Laurie Strode
-• de_perks_Survivors: Einziger Überlebender → Einziger Überlebender (Bis zum Letzen)
-• de_perks_Survivors: Entscheidungsschlag → Entscheidungsschlag (Lebenswille)
-• de_perks_Survivors: Objekt der Besessenheit → Objekt der Besessenheit (Von Besessenheit angetrieben)
-• en_perks_Survivors: Sole Survivor → Sole Survivor (Down to the Last)
-• en_perks_Survivors: Decisive Strike → Decisive Strike (Will to Live)
-• en_perks_Survivors: Object of Obsession → 
-Object of Obsession (Bound by Obsession)
-◘ Pinhead
-• de_perks_Killer: Sackgasse → Sackgasse (Schonungslos)
-• de_perks_Killer: Fluch: Spielzeug → Fluch: Spielzeug (Fluch: Opfer des Schicksals)
-• de_perks_Killer: Geißelhaken: Gabe des Schmerzes → Geißelhaken: Gabe des Schmerzes (Geißelhaken: Nässende Wunden)
-• en_perks_Killer: Deadlock → Deadlock (No Holds Barred)
-• en_perks_Killer: Hex: Plaything → Hex: Plaything (Hex: Fortune's Fool)
-• en_perks_Killer: Scourge Hook: Gift of Pain → Scourge Hook: Gift of Pain (Scourge Hook: Weeping Wounds)
-◘ Michael Myers
-• de_perks_Killer: Erlöschendes Licht → Erlöschendes Licht (Die Schwachen erlegen)
-• de_perks_Killer: Das Beste kommt zum Schluss → Das Beste kommt zum Schluss (Lass sie warten)
-• de_perks_Killer: Spiele mit deinem Essen → Spiele mit deinem Essen (Sieh sie laufen)
-• en_perks_Killer: Dying Light → Dying Light (Cull the Weak)
-• en_perks_Killer: Save the best for last → Save the best for last (Keep Them Waiting)
-• en_perks_Killer: Play with your food → Play with your food (See How They Run)
-
-4. CSV-Dateien in neuem Ordner "data" zusammengelegt, entschlackt (weniger CSVs) und mit de_ID, de_Name, en_Name & en_ID versehen:
-• de_addonsColours_Killer + en_addonsColours_Killer → addonsColours_Killer
-• de_chars_Killer + en_chars_Killer → chars_Killer
-• de_chars_Survivors + en_chars_Survivors → chars_Survivors
-• de_items_Survivors + en_items_Survivors → items_Survivors
-• de_offerings_Killer + en_offerings_Killer → offerings_Killer
-• de_offerings_Survivors + en_offerings_Survivors → offerings_Survivors
-• de_perks_Killer + en_perks_Killer → perks_Killer
-• de_perks_Survivors + en_perks_Survivors → perks_Survivors
-• Alte Ordner "de" und "en" für Survivor wurden gelöscht.
-
-5. Fehler behoben:
-• en_chars_Survivors: Èlodie Rakoto → Élodie Rakoto	
-• en_itemCategory_FL_Survivors: Anniversary → Anniversary Flashlight
-• en_itemCategory_M_Survivors: Bloodsense → Bloodsense Map
-• de_offerings_Survivors: Versteindertes Eichenholz → Versteinertes Eichenholz
-• de_perks_Killer: Sackgaße → Sackgasse
-• de_perks_Killer: Pop Gös the Weasel → Pop Goes the Weasel
-• de_perks_Killer: Haß → Hass
-• de_perks_Killer: Geißelhaken: Gezackter Kompaß → Geißelhaken: Gezackter Kompass
-• chars_Survivors: Yui kimura → Yui Kimura
+4. Bugfix
+• perks_Survivors: 'Call of Salvation' & 'Fruits of Your Labor' regarding the Umlauts adjusted (were not displayed correctly in the tool)
 
 
-# VERSION 3.0 - KILLER-UPDATE #
+#########################################################################################
+### for older version changelogs check (and translate) the German document: DE_README ###
+#########################################################################################
 
-SurvCore Editon Version 3.0 - Update vom 22.07.2026 - DbD Version 10.0.3 (ebenso wie Version 2.5)
-
-1. DATEIEN
-	1.1 Killer-Ordner "KillerEdition" für das Loadout für Killer
-		1.1.1 Unterordner: de_Killer / en_Killer
-			1.1.1.1 Dateien: _addonsColours_Killer / _chars_Killer / _offerings_Killer / _perks_Killer
-		1.1.2 weitere Dateien: DBD Loadout Generator - KillerEditon.bat / language_Killer / skript_Killer (mir war wichtig, dass keine zwei Dateien gleich heißen, um Redundanzen zu vermeiden)
-	1.2 README mit #RautenUmrahmten# Überschriften versehen (aktuelle Version & ehemalige Versionen) und aktuelle Version wird schön eingerahmt + Erklärung am Anfang vom README mit der Killer-Batch-Datei erweitert
-	
-2. SKRIPT
-	2.1 Skript "skript" im Oberordner ist weiterhin das Skript für das Survivor-Loadout und wird vom Namen her nicht verändert
-		2.1.1 Überschrift vom Fenster wurde angepasst [Z11: $form.Text = "DBD Loadout Generator - Survivor"]
-
-	2.2 Skript im Unterordner wurde "skript_Killer" genannt
-		2.2.1 Überschrift vom Fenster wurde angepasst [Z11: $form.Text = "DBD Loadout Generator - Killer"]
-		2.2.2 Killer Skript anhand Surv Skript händisch angepasst, Variablen verändert, Item-Section entfernt und erfolgreich getestet
-
-# VERSION 2.5 - SHANE-UPDATE #
-SurvCore Editon Version 2.5 - Update vom 22.07.2026 - DbD Version 10.0.3
-
-1. DATEIEN
-	1.1 Neue Perknamen von neuem Surv in _perks_Survivors  mit aufgenommen
-		1.1.1 Shane Wiigwaas (Kreuzverhör / Vollgas / Zur Hand gehen || Cross-Examination / Wide Open Throttle / Lend a Hand)
-	1.2 Neuen Char mit aufgenommen
-		• [53] _chars_Survivors (+ Shane Wiigwaas)
-	1.3 Neue Items vom 10-jährigen-Jubiläums-Event hinzugefügt (je eines)
-		• [7] _itemCategory_FL_Survivors
-		• [8] _itemCategory_MK_Survivors
-		• [10] _itemCategory_TB_Survivors
-
-
-# VERSION 2.4 - KWON-UPDATE #
-SurvCore Editon Version 2.4 - Update vom 12.05.2026 - DbD Version 9.6.2
-
-1. DATEIEN
-	1.1 Neue Perknamen von neuen Survs in _perks_Survivors  mit aufgenommen
-		1.1.1 Vee Boonyasak (Eins, Zwei, Drei, Vier! / Geisternoten / Leben auf Tour || die englischen Perk-Namen waren schon aufgenommen)
-		1.1.2 Dustin Henderson (Bada Bada Bumm / Planänderung / Teamwork: Volle Runde || Bada Bada Bumm / Change of Plan / Teamwork: Full Circuit)
-		1.1.3 Elf (Teamwork: Sanfte Töne / Wir sehen dich / Übersinnliche Wahrnehmung || Teamwork: Soft-Spoken / We See You / Extrasensory Perception)
-		1.1.4 Kwon Tae-Young (Ein Platz für uns / Fünf Züge voraus / Im Flow || A Place For Us / Five Moves Ahead / Flow State)
-	1.2 Neue Chars mit aufgenommen
-		• [52] _chars_Survivors (+ Vee Boonyasak + Dustin Henderson + Elf bzw. Eleven + Kwon Tae-Young)
-	1.3 Namen angepasst und/oder Reihenfolge an die Reihenfolge in DbD angepasst und/oder die letzte Zeile entfernt
-		• [170] _perks_Survivors 
-		• [14] _addons_FL_Survivors (+ Defekte Glühbirne bzw. engl. Äquivalent)
-		• [5] _addons_FV_Survivors
-		• [6] _addons_K_Survivors (- Abgegriffenes Abzeichen)
-		• [5] _addons_M_Survivors
-		• [14] _addons_MK_Survivors (+ Veredeltes Serum bzw. engl. Äquivalent)
-		• [11] _addons_TB_Survivors
-		• [6] _itemCategory_FL_Survivors (+ Geburtstags-Taschenlampe + Irrlicht bzw. engl. Äquivalent)
-		• [3] _itemCategory_FV_Survivors 
-		• [3] _itemCategory_K_Survivors
-		• [4] _itemCategory_M_Survivors (+ Blutsinn-Karte bzw. engl. Äquivalent & Fehlerbehebung "Crypric Map" → "Cryptic Map")
-		• [7] _itemCategory_MK_Survivors (+ Notfall-Sani-Kasten + Halloween-Brotdose + Geburtstag-Sani-Kasten bzw. engl. Äquivalent)
-		• [9] _itemCategory_TB_Survivors (+ Festliche Werkzeugkiste + Geburtstags-Werkzeugkiste bzw. engl. Äquivalent)
-		• [3] _itemCategory_X_Survivors (+ Chinesische Böller + Partykracher zum dritten Geburtstag bzw. engl. Äquivalent)
-		• [35] _items_Survivors (noch fehlende ergänzt)
-		• [43] _offerings_Survivors (- Blutpunkte-Offerings + VIP-Armband bzw. engl. Äquivalent)
-		
-
-# VERSION 2.3 - VEE-UPDATE #
-SurvCore Editon Version 2.3 - Update vom 27.09.2025 - DbD Version 9.2.0
-
-1. DATEIEN
-	1.1 Neue Perknamen von Vee wurden mit aufgenommen (Leben auf Tour / Eins, Zwei, Drei, Vier! / Geisternoten bzw. Road Life / One-Two-Three-Four! / Ghost Notes)
-	1.2 Anpassungen vorgenommen
-		• fehlerhaftes Offering (Waffen der Yamaoka-Familie → "Wappen der Yamaoka-Familie)
-		• fehlerhafte EN-Perknamen (Detectives Hunch → Detective's Hunch / Well Make It → We'll Make It / Were Gonna Live Forever → We're Gonna Live Forever)
-
-2. SKRIPT
-	2.1 Kopfzeile entfernt und im Changelog mit aufgenommen (hier werden nun DbD Version und Updatedatum genannt)
-
-3. BATCHDATEI
-	3.1 Batchdatei umbenannt und Versionierung entfernt
-
-4. CHANGELOG
-	4.1 Anleitung überarbeitet und bei den zukünftigen Ideen den Satz mit Git entfernt
-	4.2 Git Link mit aufgenommen
-
-
-# VERSION 2.2 - BATCH-PATCH #
-SurvCore Editon Version 2.2 - Update vom 15.09.2025 - DbD Version 9.1.3 
-
-• VBS Datei entfernt und stattdesssen eine Windows-Batchdatei erstellt, damit keine dubiosen Virus-Meldungen mehr auftreten.
-• Skript-Header & README angepasst
-
-
-# VERSION 2.1 #
-
-1. GUI & SKRIPT
-	1.1 Anpassung der Anordnung der Buttons
-	1.2 Hinzufügen eines COPY-Buttons
-
-2. DATEIEN
-	2.1 Anpassen fehlerhafter Werte in CSV-Dateien (Umlaute)
-
-
-# VERSION 2.0 #
-
-1. FOG VIALS / NEBELFLÄSCHCHEN
-	1.1 CSVs erstellt und befüllt:
-		• _itemCategory_FV_Survivors
-		• _addons_FV_Survivors
-	1.2. Item-CSVs (_items_Survivors) angepasst:
-		• Fog Vial Items hinzugefügt
-
-2. MAPS / KARTEN
-	2.1 Item-CSVs (_items_Survivors) angepasst
-		○ DE
-			• Regenbogenkarte → Kommentierte Karte
-			• Karte → Gekritzelte Karte
-			• Geheimnisvolle Karte hinzugefügt
-		○ EN
-			• Rainbow Map → Annotated Map
-			• Map → Scribbled Map
-			• Crypric Map hinzugefügt
-	2.2 ItemCategory-CSVs angepasst (_itemCategory_M_Survivors) und die alten durch die neuen Item-Namen ersetzt
-	2.3 ItemAddons-CSVs angepast (_addons_M_Survivors) und die alten durch die neuen Item-Namen ersetzt
-
-3. MAPS / KARTEN
-	3.1 Item-CSVs (_items_Survivors) und ItemCategory-CSVs (_itemCategory_K_Survivors) mussten NICHT angepasst werden
-	3.2 ItemAddons-CSVs angepast (_addons_K_Survivors) und die alten durch die neuen Item-Namen ersetzt
-
-4. PERKS
-	4.1 Perk-CSVs (_perks_Survivors) vervollständigt auf 158 Perks und einzelne Anpassungen vorgenommen
-
-5. SURVIVOR
-	5.1 _chars_Survivors angepasst und die beiden Grimes Survs hinzugefügt
-
-6. DATEIEN
-	6.1 Alle Dateien in DE und EN wurden nochmal als "CSV UTF-8" anstatt als "CSV" gespeichert
-
-7. SCRIPT-ANPASSUNGEN
-	7.1 Allgemeine Änderungen
-		• Versionierung & Branding hinzugefügt
-		• Neue Kopfzeile mit Titel, Edition, Versionsnummer und Datum
-		• Hinweis auf DbD-Version zur besseren Kompatibilitätsnachverfolgung
-	7.2 Item-Erkennung & Add-on-System
-		• Neuer Itemtyp hinzugefügt: "Nebel|Fog" wird nun als "FV" erkannt
-		• Damit verbunden: neue Add-on-Datei ${prefix}_addons_FV_Survivors.csv wird geladen, falls vorhanden
-		• Erweiterung der Add-on-Typen: FV wurde zur Liste der gültigen ItemCodes für Add-ons ergänzt
-
-
-# WEITERE INFOS#
-Es gibt bereits eine ungenutzte "Role"-Funktion, welche jedoch momentan nicht im Einsatz ist, da sich dieses Skript auf die Survivor-Rolle beschränkt.
-Außerdem soll noch ein Feature integriert werden, dass auch die Chars randomisiert werden können. Außerdem noch eines, mit dem man per Checkbox auswählen kann, was alles zufällig generiert werden soll und was nicht. Am besten auch noch mit einer Config-Speicherung (dafür kann der "Sprache speichern" - Button zu einem "Config speichern" - Button werden.
-
-Sollte es nochmals Probleme geben, dass Umlaute etc. falsch angezeigt werden, sind hier ein paar Beispiele für die Umkonvertierung, welche via Strg + H (Suchen + Ersetzen) durchgeführt werden kann.
+# MORE INFO #
+Should there be further problems with umlauts etc. being displayed incorrectly, here are a few examples of the conversion, which can be done via Ctrl + H (search + replace).
+Ãœ → Ü
+Ã– → Ö
+Ã„ → Ä
 Ã¼ → ü
 Ã¶ → ö
 Ã¤ → ä
-Ã„ → Ä
 Ã‰ → É
 Ã© → é
-Ã  → à (hier ist ein Leerzeichen hinter dem Ã)
-Ãœ → Ü
+Ã€ → À
+Ã  → à (There is a space after the Ã here.)
+áºž → ẞ (← capital sharp s)
+ÃŸ → ß
+
+# DISCLAIMER #
+The script was written using Microsoft Copilot Chat (Vibe Coding), also the LICENSE file. However, I personally handle all testing, verification, and adjustments of all outputs. The CSV structure and the README are entirely my own work.
